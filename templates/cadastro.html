@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% set titulo = "Página Principal" %}
+
+{% block conteudo %}
+
+<form action="/post_cadastro" method="post"></form>
+    <div class="mb-3 form-floating">
+        <input class="form-control" type="text" name="nome" id="nome" placeholder=" ">
+        <label class="form-label" for="nome">Nome do Produto</label>
+    </div>
+    
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="categoria" data-bs-toggle="dropdown" aria-expanded="false">
+          Categoria
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="categoria">
+          <li><a class="dropdown-item" href="#">Alimentos</a></li>
+          <li><a class="dropdown-item" href="#">Limpeza</a></li>
+          <li><a class="dropdown-item" href="#">Eletrônicos</a></li>
+          <li><a class="dropdown-item" href="#">Brinquedos</a></li>
+          <li><a class="dropdown-item" href="#">Vestuario</a></li>
+          <li><a class="dropdown-item" href="#">Automotivo</a></li>
+          <li><a class="dropdown-item" href="#">Esporte & Lazer</a></li>
+        </ul>
+      </div>
+
+    <div class="form-group">
+        <label for="desc">Descrição</label>
+        <textarea class="form-control" id="desc" rows="3"></textarea>
+      </div>
+    <div class="mb-3 form-floating">
+        <input class="form-control" type="text" name="estoque" id="estoque" placeholder=" ">
+        <label class="form-label" for="estoque">Estoque</label>
+
+        <div class="mb-3 form-floating">
+            <input class="form-control" type="text" name="preco" id="preco" placeholder=" ">
+            <label class="form-label" for="preco">Preço</label>
+        </div>
+    
+</form>
+
+{% endblock %}

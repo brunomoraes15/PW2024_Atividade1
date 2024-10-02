@@ -1,0 +1,1 @@
+CAMINHO_STATIC = "static"

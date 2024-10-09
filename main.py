@@ -4,14 +4,15 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 import uvicorn
-from repositories import produto_repo
+from repositories.produto_repo import *
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-PASTA_ESTATICA = "\static"
+#PASTA_ESTATICA = "\static"
 
-produto_repo.criar_tabela()
+criar_tabela()
 print("tabela criada")
+
 @app.get("/")
 def get_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -28,9 +29,20 @@ def post_cadastro(
     descricao: str = Form(...),
     estoque: int = Form(...), 
     preco: float = Form(...)):
-    if produto_repo.inserir_produto(nome, categoria, estoque, preco, descricao):
+
+    produto = Produto(
+        nome=nome,
+        categoria=categoria,
+        descricao=descricao,
+        estoque=estoque,
+        preco=preco
+    )
+    produto_inserido = inserir_produto(produto)
+    if produto_inserido:
+        print('passou')
         return RedirectResponse("/cadastro_recebido", 303)
     else:
+        print('não passou')
         return RedirectResponse("/cadastro", 303)
 
   

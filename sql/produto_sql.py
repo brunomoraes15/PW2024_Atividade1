@@ -1,22 +1,23 @@
 SQL_CRIAR_TABELA = """
 CREATE TABLE IF NOT EXISTS produto (
-    nome VARCHAR(40),
-    descricao TEXT,
-    estoque INT,
-    preco FLOAT,
-    categoria VARCHAR(20),
-    id SERIAL PRIMARY KEY
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    estoque INTEGER NOT NULL,
+    preco REAL NOT NULL
+    
 );
 """
 
 SQL_INSERIR = """
 INSERT INTO produto (nome, descricao, estoque, preco, categoria)
-VALUES (%s, %s, %s, %s, %s)
+VALUES (?, ?, ?, ?, ?)
 """
 
 SQL_EXCLUIR = """
 DELETE FROM produto
-WHERE id = %s;
+WHERE id = ?;
 """
 
 SQL_OBTER_TODOS = """

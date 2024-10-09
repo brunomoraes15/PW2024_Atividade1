@@ -6,22 +6,26 @@ from sql.produto_sql import *
 
 
 def criar_tabela():
-        bd =  obter_conexao()
-        bd = bd.cursor()
-        bd.execute(SQL_CRIAR_TABELA)
+    with obter_conexao() as conexao:
+        db = conexao.cursor()
+        db.execute(SQL_CRIAR_TABELA)
 
 
 def inserir_produto(produto: Produto) -> Optional[Produto]:
-    bd =  obter_conexao()
-    bd = bd.cursor()
-    bd.execute(SQL_INSERIR, (
-        produto.nome,
-        produto.categoria,
-        produto.estoque,
-        produto.preco,
-        produto.descricao   
+    with obter_conexao() as conexao:
+        bd = conexao.cursor()
+        bd.execute(SQL_INSERIR, (
+            produto.nome,
+            produto.categoria,
+            produto.estoque,
+            produto.preco,
+            produto.descricao   
     ))
-    bd.close() 
+    if bd.rowcount > 0:
+            produto.id = bd.lastrowid
+            return produto
+    else:
+            return None
 
 
 def obter_todos():

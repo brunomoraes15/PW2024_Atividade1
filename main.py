@@ -1,5 +1,3 @@
-## Atividade incompleta
-
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -38,6 +36,7 @@ def post_cadastro(
         preco=preco
     )
     produto_inserido = inserir_produto(produto)
+    
     if produto_inserido:
         print('passou')
         return RedirectResponse("/cadastro_recebido", 303)
